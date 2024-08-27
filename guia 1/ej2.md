@@ -17,5 +17,8 @@ devuelva su versión currificada?
 
 ```haskell
 -- dicha funcion tendria un aridad como la siguiente:
-    curryN :: (t1, t2, ... , tn) -> b
+    curryN :: ((t1, t2, ... , tn) -> b) -> (t1 -> t2 -> ... -> tn -> b)
+
+-- a priori esto no se puede ya que haskell no permite tener tuplas con cualquier cantidad de elementos, solo hasta 62 elementos.
+-- pero quizas se podria definir un tipo de data custom para una tupla n-aria
 ```
