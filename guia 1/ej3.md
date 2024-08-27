@@ -67,3 +67,8 @@ mejorSegun cmp (x:xs) = if cmp x (segunMejor xs) then x else segunMejor xs
 -- version con foldr
 mejorSegun cmp = foldr1 (\x recu -> if cmp x recu then x else recu)
 ```
+3) Definir la función
+sumasParciales :: Num a => [a] -> [a], que dada una lista de números devuelve
+otra de la misma longitud, que tiene en cada posición la suma parcial de los elementos de la lista original
+desde la cabeza hasta la posición actual. Por ejemplo, sumasParciales [1,4,-1,0,5] ; [1,5,4,4,9]
+
