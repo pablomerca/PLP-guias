@@ -72,3 +72,36 @@ sumasParciales :: Num a => [a] -> [a], que dada una lista de números devuelve
 otra de la misma longitud, que tiene en cada posición la suma parcial de los elementos de la lista original
 desde la cabeza hasta la posición actual. Por ejemplo, sumasParciales [1,4,-1,0,5] ; [1,5,4,4,9]
 
+```haskell
+sumasParciales :: [Int] -> [Int]
+sumasParciales =  reverse . snd . foldl (\(prevSum, acu) x -> (prevSum + x, ((prevSum + x) : acu))) (0, [])
+
+sumasParcialess :: [Int] -> [Int]
+sumasParcialess = reverse . snd . foldl (\(prevSum, acc) x -> let newSum = prevSum + x in (newSum, newSum : acc)) (0, [])
+```
+
+4)  Definir la función sumaAlt, que realiza la suma alternada de los elementos de una lista. Es decir, da como
+resultado: el primer elemento, menos el segundo, más el tercero, menos el cuarto, etc. Usar foldr.
+
+```haskell 
+sumaAlt' :: [Int] -> Int
+sumaAlt' [] = 0
+sumaAlt' (x:xs) = x - (sumaAlt' xs)
+
+sumaAlt :: [Int] -> Int
+sumaAlt = foldr (\x acc -> x - acc) 0
+```
+$$\begin{aligned}s[1,2,3]&=1-s[2,3]\\&=1-(2-s[3])=1-2+s[3]\\&=1-2+3-\underbrace{s[0]}_{0}\end{aligned}$$
+
+5) Hacer lo mismo que en el punto anterior, pero en sentido inverso (el último elemento menos el anteúltimo,
+etc.). Pensar qué esquema de recursión conviene usar en este caso.
+
+```haskell
+
+sumaAltL :: [Int] -> Int
+sumaAltL = foldl (\acc x -> x - acc) 0
+```
+se explica facil con esto
+$$\mathrm{foldl~(★)~z~[a,~b,~c]~=~((z~★~a)~★~b)~★~c}$$
+
+
