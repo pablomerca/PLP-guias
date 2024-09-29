@@ -269,9 +269,54 @@ reverse (x:xs)
 = foldl (flip (:)) [] (x:xs)                {R0}
 = foldl (flip (:)) (flip (:) [] x) xs       {def foldl}
 = foldl (flip (:)) (x:[]) xs                {def flip}
-= foldl (flip (:)) ([x] ++ []) xs           {iii}
-= foldl (flip (:)) ([x] ++ []) xs           {iii}
+
+= (foldl (flip (:)) [] xs) ++ [x]           {lema F}
+
+= (reverse xs) ++ [x]                       {}
+= (foldr (\x rec -> rec ++ (x:[])) [] xs) ++ [x]
+= foldr (:) [x] (foldr (\x rec -> rec ++ (x:[])) [] xs)
 ```
+
+```haskell
+-- quiero ver que:
+(foldr (\z rec -> rec ++ (z:[])) [] xs) ++ [x] = foldr (\y rec -> rec ++ (y:[])) [] (x:xs)
+
+--Caso Base:
+-- quiero ver que:
+(foldr (\y rec -> rec ++ (y:[])) [] []) ++ [x] = foldr (\z rec -> rec ++ (z:[])) [] (x:[])
+
+(foldr (\y rec -> rec ++ (x:[])) [] []) ++ [x] 
+= [] ++ [x]
+= [] ++ (x:[])
+= (\z rec -> rec ++ (z:[])) x []
+= (\z rec -> rec ++ (z:[])) x (foldr f [] [])
+= foldr (\z rec -> rec ++ (z:[])) [] (x:[])
+
+
+-- paso inductivo
+-- quiero ver que:
+(foldr (\z rec -> rec ++ (z:[])) [] (e:xs)) ++ [x] = foldr (\y rec -> rec ++ (y:[])) [] (x:e:xs)
+
+-- comenzamos del lado izquierdo
+foldr (\y rec -> rec ++ (y:[])) [] (x:xs)
+= (\y rec -> rec ++ (y:[])) x (foldr f [] xs)
+= (foldr f [] xs) ++ (x:[])
+= (foldr (\y rec -> rec ++ (y:[])) [] xs) ++ (x:[])
+= (foldr (\z rec -> rec ++ (z:[])) [] xs) ++ (x:[])
+-- legamos al lado derecho :)
+
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -283,9 +328,14 @@ reverse (x:xs)
 
 ### Caso Base:
 ```haskell
+-- quiero ver que:
 ```
 
 
 ### Paso inductivo:
 ```haskell
+-- HI:
+
+-- quiero ver que:
+
 ```
