@@ -78,12 +78,9 @@ Lo probamos con induccion estructural sobre polinomios:
 -- quiero ver que vale para todos los constructores recursivos:
 
 -- HI 
-∀ p::Polinomio a .
+∀ p::Polinomio a . ∀ q::Polinomio a .
 (sinConstantesNegativas p) ⟹ sinConstantesNegativas (derivado p)
-
--- la HI vale para p solamente, o vale para q tambien?
-
-
+(sinConstantesNegativas q) ⟹ sinConstantesNegativas (derivado q)
 
 
 
@@ -95,11 +92,6 @@ Lo probamos con induccion estructural sobre polinomios:
 = foldPoli (>=0) True (&&) (&&) (Suma p q)                                       {S0}
 = (foldPoli (>=0) True (&&) (&&) p) && (foldPoli (>=0) True (&&) (&&) q)         {F0}
 = sinConstantesNegativas p && sinConstantesNegativas q                           {S0}
-
--- a partir de aca, estoy suponiendo que la HI vale tanto para p como para q,
--- pero creo q solo vale suponer que vale para p, ya que es la variable del predicado unario.
-
-
 ⟹ sinConstantesNegativas (derivado p) && sinConstantesNegativas (derivado q)    {lema logico}
 = sinConstantesNegativas (Suma (derivado p) (derivado q))
 sinConstantesNegativas (derivado (Suma p q))
@@ -109,6 +101,25 @@ sinConstantesNegativas (derivado (Suma p q))
 ```
 
 ### Lema logico
+```
+((A -> B) && (C -> D)) -> ((A && B) -> (C && D))
 
-(a)
+Donde (A -> B) && (C -> D) son las HI.
+````
+
+
+![alt text](image.png)  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
