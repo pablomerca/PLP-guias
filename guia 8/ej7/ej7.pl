@@ -21,7 +21,6 @@ interseccion_aux([X | Xs], Ys, Ac, Zs) :-  not(member(X, Ys)), interseccion_aux(
 interseccion_aux([X | Xs], Ys, Ac, Zs) :-  member(X, Ac), interseccion_aux(Xs, Ys, Ac, Zs).
 % si X esta en Ys y ademas no lo habiamos agregado, entonces lo agregamos a Zs y agregamos X a Ac en la recursion.
 interseccion_aux([X | Xs], Ys, Ac, [X | Zs]) :-  member(X, Ys), not(member(X, Ac)), interseccion_aux(Xs, Ys, [X | Ac], Zs). 
-
 interseccion(Xs, Ys, Zs) :-  interseccion_aux(Xs, Ys, [], Zs).
 
 

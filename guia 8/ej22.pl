@@ -65,7 +65,6 @@ caminoSimple(G, D, H, L) :- caminoSimple_aux(G, D, H, [H], L).
 
 caminoSimple_aux(G, D, D, Ac, Ac) :- esNodo(G,D).
 caminoSimple_aux(G, D, H, Ac, L) :- esArista(G,H,X), not(member(X,Ac)), caminoSimple_aux(G, D, X, [X|Ac], L).
-
 % la funcion auxiliar contruye el camino desde el final hasta el comienzo...
 % ^^^ es reversible, ya que si instanciamos L, entonces la func aux va a armar el camino como siempre y en el ultimo paso 
 % lo va a comparar con la L que vino instanciada.
